@@ -44,11 +44,11 @@ static const FName NAME__ALSCharacterAnimInstance__root(TEXT("root"));
 void UALSCharacterAnimInstance::NativeInitializeAnimation()
 {
 	Super::NativeInitializeAnimation();
-	Character = Cast<AALSBaseCharacter>(TryGetPawnOwner());
+	/*Character = Cast<AALSBaseCharacter>(TryGetPawnOwner());
 	if (Character)
 	{
 		Character->OnJumpedDelegate.AddDynamic(this, &UALSCharacterAnimInstance::OnJumped);
-	}
+	}*/
 }
 
 void UALSCharacterAnimInstance::NativeBeginPlay()
@@ -59,6 +59,11 @@ void UALSCharacterAnimInstance::NativeBeginPlay()
 	if (APawn* Owner = TryGetPawnOwner())
 	{
 		ALSDebugComponent = Owner->FindComponentByClass<UALSDebugComponent>();
+	}
+	Character = Cast<AALSBaseCharacter>(TryGetPawnOwner());
+	if (Character)
+	{
+		Character->OnJumpedDelegate.AddDynamic(this, &UALSCharacterAnimInstance::OnJumped);
 	}
 }
 
